@@ -4,7 +4,7 @@
   },
   "inbounds": [
     {
-      "port": PORT_PLACEHOLDER,
+      "port": "PORT_PLACEHOLDER",
       "listen": "0.0.0.0",
       "protocol": "vless",
       "settings": {
