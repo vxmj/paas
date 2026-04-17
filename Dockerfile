@@ -1,12 +1,15 @@
 FROM alpine:latest
 
-# 仅保留基础运行和下载所需的依赖
-RUN apk add --no-cache ca-certificates curl
+# 重新加回 sed，因为需要用它来替换环境变量
+RUN apk add --no-cache ca-certificates curl sed
 
-# 设置 /app 为主目录
+# 设置默认环境变量
+ENV PORT=30022
+ENV UUID=209563cc-ea0a-4676-adb0-c8e79ca4db75
+ENV WS_PATH=/api/v2/icons/2f9bc001
+
 WORKDIR /app
 
-# 将写好的 config.json 复制到主目录
 COPY config.json /app/config.json
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
