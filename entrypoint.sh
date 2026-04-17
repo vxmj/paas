@@ -18,7 +18,12 @@ if [ ! -f "$CONFIG_FILE" ]; then
   exit 1
 fi
 
-echo "已准备就绪，即将启动..."
+# 核心修复：替换 config.json 中的占位符为 Dockerfile 中的环境变量
+sed -i "s/PORT_PLACEHOLDER/$PORT/g" "$CONFIG_FILE"
+sed -i "s/UUID_PLACEHOLDER/$UUID/g" "$CONFIG_FILE"
+sed -i "s|PATH_PLACEHOLDER|$WS_PATH|g" "$CONFIG_FILE"
 
-# 直接使用固定的配置文件启动
-exec "$DIR/$BIN_NAME" -config "$CONFIG_FILE" >/dev/null 2>&1
+echo "配置文件已生成。已准备就绪，即将启动 (端口: $PORT, 路径: $WS_PATH)..."
+
+# 核心修复：去掉了 >/dev/null 2>&1，这样如果再报错，你就能在 docker logs 里看到具体原因了
+exec "$DIR/$BIN_NAME" -config "$CONFIG_FILE"
