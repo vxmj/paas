@@ -1,0 +1,34 @@
+{
+  "log": {
+    "loglevel": "none" 
+  },
+  "inbounds": [
+    {
+      "port": "PORT_PLACEHOLDER",
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "UUID_PLACEHOLDER",
+            "level": 0
+          }
+        ],
+        "decryption": "none" 
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none", 
+        "wsSettings": {
+          "path": "PATH_PLACEHOLDER"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom" 
+    }
+  ]
+}
